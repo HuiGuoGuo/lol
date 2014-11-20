@@ -1,0 +1,22 @@
+
+<div id="main">
+  <div class="row-fluid">
+    <div class="span10">
+      <div class="box box-color box-bordered" >
+        <div class="box-title">
+          <h5>比赛名次</h5>
+        </div>
+        <div class="box-content" style='text-align:center;font-size:40px;'>
+          <h2>冠军:<%=@champion.name %></h2>
+          <h3>亚军:<%=@second_place.name %></h3>
+          <h4>季军:<%=@third_place.name %></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="form-actions" style='text-align:center;'>
+  <div class='actions'>
+    <%=link_to '返回',person_registrations_url(audit: '1'),:class => 'btn btn'%>
+  </div>
+</div>

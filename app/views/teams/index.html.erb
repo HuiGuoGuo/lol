@@ -1,0 +1,46 @@
+
+<div id = 'main'>
+  <ul class="nav nav-tabs" id="myTab">
+    <li <% if params[:audit] == '0' %>class="active" <% end %>><%= link_to "团队", teams_url(audit: 0) %></li>
+    <li<% if params[:audit] == '1' %> class="active" <% end %>><%= link_to "个人", person_registrations_url(audit: 1) %></li>
+  </ul>
+  <script>
+    $(function () {
+      $('#myTab a:last').tab('show');
+    })
+  </script>
+  <div class="row-fluid">
+    <div class="span10">
+      <div class="box box-color box-bordered" id="home">
+        <div class="box-title">
+          <h3>团队信息</h3>
+        </div>
+        <div class="box-content nopadding">
+          <table class="table dataTable table-hover table-nomargin table-bordered">
+            <thead>
+              <tr>
+                <th>Team name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% @teams.each do |team| %>
+                <tr>
+                  <td><%= team.team_name %></td>
+                  <td>
+                    <%= link_to '查看队员', team %>
+                    <%= link_to 'Edit', edit_team_path(team) %>
+                    <%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

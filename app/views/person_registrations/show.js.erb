@@ -1,0 +1,3 @@
+  $("#myModalLabel").html("<%=@person_registration.name%>选手");
+  $("#myModal").modal("show");
+  $.ajax({data:{id:<%=@team.id%>}, success:function(request){$('.modal-body').html(request);}, type:'get', url:'/registrations/new_member'});

@@ -1,0 +1,61 @@
+<%if params[:x]%>
+  <% x=@x%>
+<%else%>
+  <% x=1%>
+<%end%>
+<%= form_tag get_winer_first_person_registrations_path ,:method=> :post do |f|%>
+  <%= hidden_field_tag 'state',1%>
+  <h2>随机分组如下:</h2>
+  </br>
+  <% if @o%>
+    <div id="main">
+      <div class="row-fluid">
+        <div class="span10">
+          <div class="box box-color box-bordered" >
+            <div class="box-title">
+              <h5>幸运的一组是:</h5>
+            </div>
+            <div class="box-content" style='text-align:center;font-size:40px;'>
+              <%=PersonRegistration.find(@o).name %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+  <%@subgroup.each do | subgroup|%>
+    <% if PersonRegistration.where(id: subgroup)%>
+      <div id="main">
+        <div class="row-fluid">
+          <div class="span10">
+            <div class="box box-color box-bordered" >
+              <div class="box-title">
+                <h5>对阵信息:第<%=x%>组</h5>
+              </div>
+              <div class="box-content" style='text-align:center;font-size:40px;'>
+                <%PersonRegistration.where(id: subgroup).each do |person_registration|%>
+                  <%= hidden_field_tag 'count[]',person_registration.id%>
+                  <%=person_registration.name%>
+                  <div style='color:red'><%='VS' if PersonRegistration.where(id: subgroup).first == person_registration%></div>
+                <%end%>
+                </br>
+                <div style='text-align:right;font-size:20px;'>
+                  获胜者:<%= select_tag 'get_winer_first[]',options_for_select(PersonRegistration.where(id: subgroup).collect {|person_registration| [person_registration.name,person_registration.id]},:class =>'select2-me')%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%x=x+1%>
+      <%=hidden_field_tag 'x',x%>
+      <%=hidden_field_tag 'o',@o%>
+    <%end%>
+  <%end%>
+  <div class="form-actions" style='text-align:center;'>
+    <div class='actions'>
+      <%=submit_tag '确定',:class => 'btn btn-primary'%>
+      <%=link_to '返回',person_registrations_url(audit: '1'),:class => 'btn btn'%>
+    </div>
+  </div>
+<%end%>

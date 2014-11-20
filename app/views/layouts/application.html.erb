@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>试剂耗材采购系统</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Apple devices fullscreen -->
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <!-- Apple devices Homescreen icon -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/apple-touch-icon-precomposed.png" />
+  </head>
+  <body  style="overflow-y:scroll;font:12px 'Microsoft YaHei', 微软雅黑, Arial, Lucida Grande, Tahoma, sans-serif; text-shadow: 0px 0px 0px #D1D1D1;">
+    <div id="navigation">
+      <div class="container-fluid">
+        <a href="/home/index" id="brand">LOL挑战赛</a>
+        <div class="user">
+          <%= render 'layouts/user' unless params[:controller] == 'home'%>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" id="content">
+      <div >
+        <div class="container-fluid">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

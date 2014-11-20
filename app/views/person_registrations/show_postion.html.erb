@@ -1,0 +1,45 @@
+
+<div id= 'main'>
+  <div class="row-fluid ">
+    <div class="span8">
+      <div class="box box-color box-bordered">
+
+        <div class="box-title">
+          <h3>
+            <i class="icon-table"></i>
+            比赛成绩
+          </h3>
+        </div>
+        <div class="box-content nopadding ">
+          <div class="form-horizontal form-column form-bordered">
+            <div class="control-group">
+              <label for="name" class="control-label right">冠军:</label>
+              <div class="controls">
+                <%= link_to @champion.name,person_registration_path(@champion.id)%>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="name" class="control-label right">亚军:</label>
+              <div class="controls">
+                <%= link_to @the_second.name,person_registration_path(@the_second.id)%>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="country" class="control-label right">季军:</label>
+              <div class="controls">
+                <%= link_to @the_third.name,person_registration_path(@the_third.id)%>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <%= link_to '返回', person_registrations_path(audit: '1'), :class => 'btn btn' %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

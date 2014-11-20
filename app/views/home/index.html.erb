@@ -1,0 +1,27 @@
+<body class='login'>
+  <div class="wrapper">
+    <h1><a ><img src="/assets/logo-big.png" alt="" class='retina-ready' width="59" height="49">LOL挑战赛</a></h1>
+    <div class="login-body">
+      <h4>&nbsp;</h4>
+      <form  class='form-validate' id="test">
+        <div class="control-group">
+          <div class="email controls">
+            <%= link_to '个人入口 ',new_person_registration_path, :class =>"btn-lightred btn-block btn btn-large"%>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= link_to '团队入口 ',new_team_path,:class=> 'btn-satgreen btn-block btn btn-large'%>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= link_to '管理员进入 ',new_team_path,:class=> 'btn-satgreen btn-block btn btn-large'%>
+          </div>
+        </div>
+        <h4>&nbsp;</h4>
+      </form>
+    </div>
+  </div>
+</body>
+

@@ -1,0 +1,60 @@
+<div id ="main">
+  <div class="row-fluid">
+    <div class="span10">
+      <div class="box box-color box-bordered">
+        <div class="box-title">
+          <h3>
+            <i class="icon-user"></i>
+            团队信息填写
+          </h3>
+        </div>
+        <div class="box-content nopadding">
+          <ul class="tabs tabs-inline tabs-top">
+            <li class='active'>
+            <a href="#profile" data-toggle='tab'><i class="icon-user"></i>团队信息</a>
+            </li>
+            <li>
+          </ul>
+          <div class="tab-content padding tab-content-inline tab-content-bottom">
+            <div class="tab-pane active" id="profile">
+              <%= form_for(@team, :remote => true) do |f| %>
+                <div class="row-fluid">
+                <div class="span2">
+                  <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;"><img src="/assets/demo/user-1.jpg" /></div>
+                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                    <div>
+                      <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name='imagefile' /></span>
+                      <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="span10">
+                  <div class="control-group">
+                    <label for="name" class="control-label right">团队名字(注册不可更改):</label>
+                    <div class="controls">
+                      <%= f.text_field :team_name, :class => 'input-middle'%>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <input type="submit" class='btn btn-primary' value="确定并新增队员">
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+</div>

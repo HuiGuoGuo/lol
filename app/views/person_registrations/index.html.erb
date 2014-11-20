@@ -1,0 +1,52 @@
+
+<div id = 'main'>
+  <ul class="nav nav-tabs" id="myTab">
+    <li <% if params[:audit] == '0' %>class="active" <% end %>><%= link_to "团队", teams_url(audit: 0) %></li>
+    <li<% if params[:audit] == '1' %> class="active" <% end %>><%= link_to "个人", person_registrations_url(audit: 1) %></li>
+  </ul>
+  <script>
+    $(function () {
+      $('#myTab a:last').tab('show');
+    })
+  </script>
+  <div class="row-fluid">
+    <div class="span10">
+      <div class="box box-color box-bordered" id="home">
+        <div class="box-title">
+          <h3>选手信息</h3>
+        <div style="float:right; padding-right:2px;">
+          <%= link_to '查看名次',show_postion_person_registrations_path,:class =>'btn btn-primary btn-large',:target=>'_blank'%>
+          <%= link_to '随机分组',subgroup_person_registrations_path,:class =>'btn btn-primary btn-large'%>
+        </div>
+        </div>
+        <div class="box-content nopadding">
+          <table class="table dataTable table-hover table-nomargin table-bordered">
+            <thead>
+              <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @person_registrations.each do |person| %>
+                <tr>
+                  <td><%= person.name %></td>
+                  <td><%= person.sex%></td>
+                  <td><%= person.age%></td>
+                  <td>
+                    <%= link_to '查看详细信息', person,:class => 'btn btn-small' %>
+                    <%= link_to '删除', person, method: :delete, data: { confirm: '确定删除?' },:class => 'btn btn-small btn-danger' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

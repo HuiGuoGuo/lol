@@ -1,0 +1,76 @@
+<div id= 'main'>
+  <div class="row-fluid ">
+    <div class="span8">
+      <div class="box box-color box-bordered">
+
+        <div class="box-title">
+          <h3>
+            <i class="icon-table"></i>
+            <%=@team.team_name%> 团队信息
+          </h3>
+        </div>
+        <div class="box-content nopadding ">
+          <div class="form-horizontal form-column form-bordered">
+            <%@registrations.each do |f|%>
+              <div class="control-group">
+                <label for="name" class="control-label right">姓名:</label>
+                <div class="controls">
+                  <%='队长:'if f.is_leader%>
+                  <%= f.name%>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="name" class="control-label right">参赛码:</label>
+                <div class="controls">
+                  <%= f.number%>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="country" class="control-label right">年龄:</label>
+                <div class="controls">
+                  <%= f.age%>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="name" class="control-label right">性别:</label>
+                <div class="controls">
+                  <%= f.sex%> 男
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="xemail" class="control-label right">Email:</label>
+                <div class="controls">
+                  <%= f.email%>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="pw" class="control-label right">电话:</label>
+                <div class="controls">
+                  <div class="form-button">
+                    <%= f.phone%>
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="pw" class="control-label right">地址:</label>
+                <div class="controls">
+                  <div class="form-button">
+                    <%= f.address%>
+                  </div>
+                </div>
+              </div>
+
+              <div class="page-header">
+              </div>
+            <%end%>
+
+            <div class="form-actions">
+              <%= link_to '返回', teams_url(audit: 0),:class=>'btn btn' %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

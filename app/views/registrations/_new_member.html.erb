@@ -1,0 +1,64 @@
+<%= form_for(@registration, :html => {:class => ' form-validate form-horizontal form-column form-bordered'}, :remote => true) do |f| %>
+  <%= hidden_field_tag :audit ,'1'%>
+<div class="control-group">
+  <label for="name" class="control-label right">*姓名:</label>
+  <div class="controls">
+    <%= f.text_field :name,{'data-rule-required'=>"true", :class => 'input-middle'}%>
+    &nbsp;&nbsp;是否为队长:&nbsp;&nbsp;&nbsp;    <%= f.check_box :is_leader%>
+</div>
+</div>
+<div class="control-group">
+  <label for="name" class="control-label right">*身份证号码:</label>
+  <div class="controls">
+    <%= f.text_field :id_card,{'data-rule-required'=>"true", :class => 'input-middle'}%> 
+  </div>
+</div>
+<div class="control-group">
+  <label for="name" class="control-label right">*QQ号码:</label>
+  <div class="controls">
+    <%= f.text_field :qq,{'data-rule-required'=>"true", :class => 'input-middle'}%> 
+  </div>
+</div>
+<div class="control-group">
+  <label for="pw" class="control-label right">*电话:</label>
+  <div class="controls">
+    <div class="form-button">
+      <%= f.text_field :phone, {'data-rule-required'=>"true", :class => 'input-middle'}%>
+    </div>
+  </div>
+</div>
+<div class="control-group">
+  <label for="country" class="control-label right">年龄:</label>
+  <div class="controls">
+    <%= f.text_field :age, :class => 'input-small'%>
+  </div>
+</div>
+<div class="control-group">
+  <label for="name" class="control-label right">性别:</label>
+  <div class="controls">
+    <%= f.radio_button :sex,'boy'%> 男
+    <%= f.radio_button :sex,'girl'%> 女
+  </div>
+</div>
+<div class="control-group">
+  <label for="xemail" class="control-label right">Email:</label>
+  <div class="controls">
+    <%= f.text_field :email, :class => 'input-large',:value=>"j.doe@johndoeemail.com"%>
+  </div>
+</div>
+<div class="control-group">
+  <label for="pw" class="control-label right">地址:</label>
+  <div class="controls">
+    <div class="form-button">
+      <%= f.text_field :address, :class => 'input-xlarge'%>
+    </div>
+  </div>
+</div>
+<div class="span12">
+  <div class="form-actions">
+    <div class="actions">
+      <%= f.submit "保存", :class => 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+ <% end %>

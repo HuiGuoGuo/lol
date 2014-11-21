@@ -1,0 +1,57 @@
+
+<% x=1%>
+<%= form_tag get_winer_first_teams_path ,:method=> :post do |f|%>
+  <%= hidden_field_tag 'state',1%>
+  <%=hidden_field_tag 'o',@o%>
+  <h2>随机分组如下:</h2>
+  </br>
+  <% if @o%>
+    <div id="main">
+      <div class="row-fluid">
+        <div class="span10">
+          <div class="box box-color box-bordered" >
+            <div class="box-title">
+              <h5>幸运的一组是:</h5>
+            </div>
+            <div class="box-content" style='text-align:center;font-size:40px;'>
+              <%=Team.find(@o).name %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+  <%@subgroup.each do | subgroup|%>
+    <% if Team.where(id: subgroup)%>
+      <div id="main">
+        <div class="row-fluid">
+          <div class="span10">
+            <div class="box box-color box-bordered" >
+              <div class="box-title">
+                <h5>对阵信息:第<%=x%>组</h5>
+              </div>
+              <div class="box-content" style='text-align:center;font-size:40px;'>
+                <%Team.where(id: subgroup).each do |team|%>
+                  <%=team.name%>
+                  <%= hidden_field_tag 'count[]',team.id%>
+                  <div style='color:red'><%='VS' if Team.where(id: subgroup).first == team%></div>
+                <%end%>
+                </br>
+                <div style='text-align:right;font-size:20px;'>
+                  获胜者:<%= select_tag 'get_winer_first[]',options_for_select(Team.where(id: subgroup).collect {|team| [team.name,team.id]},:class =>'select2-me')%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%x=x+1%>
+    <%end%>
+  <%end%>
+  <div class="form-actions" style='text-align:center;'>
+    <div class='actions'>
+      <%=submit_tag '确定',:class => 'btn btn-primary'%>
+      <%=link_to '返回',teams_path(audit:'0'),:class => 'btn btn'%>
+    </div>
+  </div>
+<%end%>

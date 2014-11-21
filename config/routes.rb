@@ -10,7 +10,16 @@ Blog::Application.routes.draw do
     end
   end
 
-  resources :teams
+  resources :teams do
+    collection do
+      get 'subgroup'
+      post 'get_winer_first'
+      get 'subgroup_winer'
+      get 'last_winer'
+      post 'position'
+      get 'show_postion'
+    end
+  end
 
   get "home/index"
 

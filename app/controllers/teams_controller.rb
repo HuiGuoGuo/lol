@@ -44,11 +44,12 @@ class TeamsController < ApplicationController
   def create
     name = params[:team][:team_name]
     if Team.all.map {|t| t.team_name}.include?(name)
-      @audit = 1
+      render :js =>'alert("这个队伍名称已经被别人用了哟，请换个名字")'
     else
+      @audit = 0
+      p params[:team]
       @team = Team.new(params[:team])
       @team.save
-      @audit= 0
     end
   end
 
@@ -77,6 +78,147 @@ class TeamsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to teams_url }
       format.json { head :no_content }
+    end
+  end
+
+  def show_postion
+    @champion = Team.where("state = '冠军'").first
+    @champion_registration = @champion.registrations
+    @the_second = Team.where("state = '亚军'").first
+    @the_second_registration = @the_second.registrations
+    @the_third = Team.where("state = '季军'").first
+    @the_third_registration = @the_third.registrations
+
+  end
+
+  def subgroup
+    @team = Team.all
+    #随机抽取俩个组
+    z = Array.new
+    y = Array.new
+    x = Array.new
+    @subgroup = Array.new
+    @team.each.map {|x| y << x.id.to_s}
+
+    subgroup_winer(y)
+
+  end
+
+  def get_winer_first
+
+    if params[:get_winer_first].count == 1 && params[:o] #剩下3人的情况
+
+      @the_one = params[:get_winer_first] #冠军
+      @the_second_1 = params[:count]-params[:get_winer_first]  #争夺亚季军
+      @the_second_2 = params[:o]#争夺亚季军
+      redirect_to last_winer_teams_path(:person => '3',:the_one => @the_one, :the_second_1 => @the_second_1, :the_second_2 => @the_second_2)
+
+    elsif params[:get_winer_first].count == 2 && params[:o].blank? #剩下4人的情况 
+
+      @The_third = params[:count]-params[:get_winer_first] #季军的争夺
+      @The_first = params[:get_winer_first] #冠亚军的争夺
+      redirect_to last_winer_teams_path(:first=>@The_first,:third => @The_third)
+
+    else
+
+      if params[:o].blank?
+
+      else
+        params[:get_winer_first] = params[:get_winer_first] << params[:o]
+      end
+      subgroup_winer(params[:get_winer_first])
+    end
+  end
+
+  def last_winer
+    if params[:person] == '3'
+
+      @the_one = params[:the_one]
+
+      @second_arry = []
+      @second_arry << params[:the_second_1].first
+      @second_arry << params[:the_second_2]
+
+    else
+
+      @first = params[:first]
+      @third = params[:third]
+
+    end
+
+
+  end
+
+  def position #名次
+
+    if params[:the_one] #剩三人情况
+      @champion = Team.find(params[:the_one])  #冠军
+      @champion.state = '冠军'
+      @champion.save
+      @second_place = Team.find(params[:the_second]) #亚军
+      @second_place.state = '亚军'
+      @second_place.save
+      p params[:count]
+      params[:count].delete(params[:the_second])
+      p params[:count]
+      p @third_place = Team.find(params[:count].first) #季军
+      @third_place.state = '季军'
+      @third_place.save
+
+    else #剩四人情况
+
+      @champion = Team.find(params[:the_first])  #冠军
+      @champion.state = '冠军'
+      @champion.save
+      params[:first].delete(params[:the_first]) 
+      @second_place = Team.find(params[:first].first) #亚军
+      @second_place.state = '亚军'
+      @second_place.save
+      @third_place = Team.find(params[:the_third]) #季军
+      @third_place.state = '季军'
+      @third_place.save
+    end
+  end
+
+  private
+  def subgroup_winer(y)
+
+    z = Array.new
+    x = Array.new
+    @subgroup = Array.new
+    count = y.length
+    if count%2 != 0
+      luck = rand(count)
+      @o = y[luck].to_s
+      y.delete(@o)
+    end
+    count = y.length
+    a = rand(count)
+    x << a
+    while x.size < 2 do
+      b = rand(count)
+      x << b unless b.eql?a
+    end
+    x.each do |x|
+      z << y[x].to_s
+    end
+    @subgroup << z
+    for i in 0..count/2-2 do
+      y = y -z 
+      count = y.length
+      z = Array.new
+      x = Array.new
+      a = rand(count)
+      x << a
+      while x.size < 2 do
+        b = rand(count)
+        x << b unless b.eql?a
+      end
+      x
+      x.each do |x|
+        z << y[x].to_s
+      end
+      @subgroup << z
     end
   end
 end

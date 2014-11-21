@@ -14,24 +14,31 @@
       <div class="box box-color box-bordered" id="home">
         <div class="box-title">
           <h3>团队信息</h3>
+        <div style="float:right; padding-right:2px;">
+          <%= link_to '查看名次',show_postion_teams_path,:class =>'btn btn-primary btn-large',:target=>'_blank'%>
+          <%= link_to '随机分组',subgroup_teams_path,:class =>'btn btn-primary btn-large'%>
+        </div>
         </div>
         <div class="box-content nopadding">
           <table class="table dataTable table-hover table-nomargin table-bordered">
             <thead>
               <tr>
-                <th>Team name</th>
-                <th></th>
+                <th>团队名字</th>
+                <th>成员数量</th>
+                <th>队长</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody>
 
               <% @teams.each do |team| %>
                 <tr>
-                  <td><%= team.team_name %></td>
+                  <td><%= team.name %></td>
+                  <td><%= team.registrations.count %></td>
+                  <td><%= team.registrations.leader.name if team.registrations.leader  %></td>
                   <td>
-                    <%= link_to '查看队员', team %>
-                    <%= link_to 'Edit', edit_team_path(team) %>
-                    <%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <%= link_to '查看队员', team,:class => 'btn btn-small' %>
+                    <%= link_to '删除', team, method: :delete, data: { confirm: '确定删除?' },:class => 'btn btn-danger btn-small' %>
                   </td>
                 </tr>
               <% end %>

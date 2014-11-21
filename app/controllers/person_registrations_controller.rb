@@ -72,6 +72,7 @@ class PersonRegistrationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def show_postion
     @champion = PersonRegistration.where("state = '冠军'").first
     @the_second = PersonRegistration.where("state = '亚军'").first

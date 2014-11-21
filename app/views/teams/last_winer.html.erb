@@ -1,15 +1,15 @@
 
-<%= form_tag position_person_registrations_path ,:method => :post do |f|%>
+<%= form_tag position_teams_path ,:method => :post do |f|%>
   <%if params[:person] =='3'%>
     <div id="main">
       <div class="row-fluid">
         <div class="span10">
           <div class="box box-color box-bordered" >
             <div class="box-title">
-              <h5>冠军是:</h5>
+              <h5>冠军团队是:</h5>
             </div>
             <div class="box-content" style='text-align:center;font-size:40px;'>
-              <%=  PersonRegistration.find(@the_one).first.name%>
+              <%=  Team.find(@the_one).first.name%>
               <%= hidden_field_tag :the_one, @the_one %>
             </div>
           </div>
@@ -22,13 +22,13 @@
               <h5>亚、季军组:</h5>
             </div>
             <div class="box-content" style='text-align:center;font-size:40px;'>
-              <% PersonRegistration.where(id: @second_arry).each do |person_registration|%>
-                <%=person_registration.name%>
-                <%= hidden_field_tag 'count[]', person_registration.id %>
-                <div style='color:red'><%='VS' if PersonRegistration.where(id: @second_arry).first == person_registration%></div>
+              <% Team.where(id: @second_arry).each do |team|%>
+                <%=team.name%>
+                <%= hidden_field_tag 'count[]', team.id %>
+                <div style='color:red'><%= 'VS' if Team.where(id: @second_arry).first == team %></div>
               <%end%>
               <div style='text-align:right;font-size:20px;'>
-                获胜者:<%= select_tag 'the_second',options_for_select(PersonRegistration.find(@second_arry).map {|second|[second.name,second.id]})%>
+                获胜团队:<%= select_tag 'the_second',options_for_select(Team.find(@second_arry).map {|second|[second.name,second.id]})%>
               </div>
             </div>
           </div>
@@ -45,14 +45,14 @@
               <h5>冠军组:</h5>
             </div>
             <div class="box-content" style='text-align:center;font-size:40px;'>
-              <% PersonRegistration.where(id: @first).each do |person_registration|%>
-                <%=person_registration.name%>
-                <%= hidden_field_tag 'first[]', person_registration.id %>
-                <div style='color:red'><%='VS' if PersonRegistration.where(id: @first).first == person_registration%></div>
+              <% Team.where(id: @first).each do |team|%>
+                <%=team.name%>
+                <%= hidden_field_tag 'first[]', team.id %>
+                <div style='color:red'><%='VS' if Team.where(id: @first).first == team%></div>
               <%end%>
               </br>
               <div style='text-align:right;font-size:20px;'>
-                获胜者:<%= select_tag 'the_first',options_for_select(PersonRegistration.where(id: @first).collect {|person_registration| [person_registration.name,person_registration.id]},:class =>'select2-me')%>
+                获胜者:<%= select_tag 'the_first',options_for_select(Team.where(id: @first).collect {|team| [team.name,team.id]},:class =>'select2-me')%>
               </div>
             </div>
           </div>
@@ -65,13 +65,13 @@
               <h5>季军组:</h5>
             </div>
             <div class="box-content" style='text-align:center;font-size:40px;'>
-              <% PersonRegistration.where(id: @third).each do |person_registration|%>
-                <%=person_registration.name%>
-                <div style='color:red'><%='VS' if PersonRegistration.where(id: @third).first == person_registration%></div>
+              <% Team.where(id: @third).each do |team|%>
+                <%=team.name%>
+                <div style='color:red'><%='VS' if Team.where(id: @third).first == team%></div>
               <%end%>
               </br>
               <div style='text-align:right;font-size:20px;'>
-                获胜者:<%= select_tag 'the_third',options_for_select(PersonRegistration.where(id: @third).collect {|person_registration| [person_registration.name,person_registration.id]},:class =>'select2-me')%>
+                获胜者:<%= select_tag 'the_third',options_for_select(Team.where(id: @third).collect {|team| [team.name,team.id]},:class =>'select2-me')%>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@
     <div class="form-actions" style='text-align:center;'>
       <div class='actions'>
         <%=submit_tag '确定',:class => 'btn btn-primary'%>
-        <%=link_to '返回',person_registrations_url,:class => 'btn btn'%>
+        <%=link_to '返回',teams_url(audit: '0'),:class => 'btn btn'%>
       </div>
     </div>
 

@@ -1,7 +1,8 @@
 #encoding:utf-8
 class RegistrationsController < ApplicationController
   # GET /registrations
-  # GET /registrations.json
+ # GET /registrations.json
+ before_filter :authenticate_user!
   def index
     @registrations = Registration.all
 

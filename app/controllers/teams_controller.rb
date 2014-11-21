@@ -2,6 +2,7 @@
 class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
+  before_filter :authenticate_user! ,:except => [:new, :create]
   def index
     @teams = Team.all
 

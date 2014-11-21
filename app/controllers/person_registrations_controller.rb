@@ -2,6 +2,7 @@
 class PersonRegistrationsController < ApplicationController
   # GET /person_registrations
   # GET /person_registrations.json
+  before_filter :authenticate_user! ,:except => [:new, :create]
   def index
     @person_registrations = PersonRegistration.all
 

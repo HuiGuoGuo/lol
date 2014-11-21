@@ -24,8 +24,8 @@
             <thead>
               <tr>
                 <th>团队名字</th>
-                <th>成员数量</th>
                 <th>队长</th>
+                <th>成员数量</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -34,8 +34,14 @@
               <% @teams.each do |team| %>
                 <tr>
                   <td><%= team.name %></td>
+                  <td>
+                    <%  if team.registrations.leader.first  %>
+                      <%=team.registrations.leader.first.name %>
+                    <%else%>
+                      <%= '无队长'%>
+                    <%end%>
+                  </td>
                   <td><%= team.registrations.count %></td>
-                  <td><%= team.registrations.leader.name if team.registrations.leader  %></td>
                   <td>
                     <%= link_to '查看队员', team,:class => 'btn btn-small' %>
                     <%= link_to '删除', team, method: :delete, data: { confirm: '确定删除?' },:class => 'btn btn-danger btn-small' %>

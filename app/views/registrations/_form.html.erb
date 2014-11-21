@@ -33,8 +33,11 @@
                   <div class="control-group">
                     <label for="name" class="control-label right">*姓名:</label>
                     <div class="controls">
-                      <%= f.text_field :name,{'data-rule-required'=>"true", :class => 'input-middle'}%>
+                      <%= f.text_field :name,{'data-rule-required'=>"true", :class => 'input-middle','tabindex'=>"1" }%>
+                      <div id='is_leader'>
                       &nbsp;&nbsp;是否为队长:&nbsp;&nbsp;&nbsp;    <%= f.check_box :is_leader%>
+                      </div>
+
                   </div>
                   </div>
                   <div class="control-group">
@@ -99,3 +102,18 @@
     </div>
   </div>
 </div>
+<script>
+  
+  $("#registration_name").keyup(function(){
+
+    $.get("judge_is_leader?id=<%=@team.id%>",function(result){
+      var obj = document.getElementById("registration_is_leader");
+      if (result == 1)
+      {
+        obj.style.display='none';
+        $("#is_leader").html('<%= escape_javascript(render :partial => 'is_leader')%>')
+      }
+    });
+  });
+
+</script>

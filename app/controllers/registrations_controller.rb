@@ -81,4 +81,14 @@ class RegistrationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def judge_is_leader
+    team = Team.find(params[:id])
+    registrations = team.registrations
+    if registrations.map {|registration| registration.is_leader}.include?(true)
+      result = 1 
+    end
+    respond_to do |format|
+      format.json {render :json=> result}
+    end
+  end
 end

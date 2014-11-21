@@ -26,6 +26,7 @@ Blog::Application.routes.draw do
   resources :registrations do
     collection do
       get 'new_member'
+      get 'judge_is_leader'
     end
   end
 

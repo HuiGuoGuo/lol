@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(:version => 20141121083226) do
     t.string   "number"
     t.string   "phone"
     t.string   "email"
+    t.integer  "season",     :default => 1
     t.integer  "team_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.string   "state"
-    t.integer  "season",     :default => 1
   end
 
   create_table "registrations", :force => true do |t|
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(:version => 20141121083226) do
     t.string   "phone"
     t.string   "email"
     t.boolean  "is_leader",  :default => false
+    t.integer  "season",     :default => 1
     t.integer  "team_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.integer  "season",     :default => 1
   end
 
   create_table "roles", :force => true do |t|
@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(:version => 20141121083226) do
 
   create_table "teams", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "season"
     t.string   "state"
-    t.integer  "season",     :default => 1
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

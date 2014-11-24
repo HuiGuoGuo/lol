@@ -2,7 +2,6 @@
 class RegistrationsController < ApplicationController
   # GET /registrations
  # GET /registrations.json
- before_filter :authenticate_user!
   def index
     @registrations = Registration.all
 

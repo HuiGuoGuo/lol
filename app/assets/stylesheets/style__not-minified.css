@@ -4761,7 +4761,6 @@ label, input, button, select, textarea {
   padding-right: 69px;
   padding-left: 35px;
   padding-bottom: 2px;
-  background: url("/assets/logo.png") no-repeat;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   #navigation #brand {

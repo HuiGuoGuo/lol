@@ -15,7 +15,7 @@
               <div class="control-group">
                 <label for="name" class="control-label right">姓名:</label>
                 <div class="controls">
-                  <%='队长:'if f.is_leader%>
+                  <a style='color:red;font-weight:800;'> <%='队长 :'if f.is_leader%></a>
                   <%= f.name%>
                 </div>
               </div>

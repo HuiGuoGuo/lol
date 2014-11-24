@@ -30,6 +30,7 @@
               <tr>
                 <th>团队名字</th>
                 <th>队长</th>
+                <th>队长联系方式</th>
                 <th>成员数量</th>
                 <th>操作</th>
               </tr>
@@ -44,6 +45,13 @@
                       <%=team.registrations.leader.first.name %>
                     <%else%>
                       <%= '无队长'%>
+                    <%end%>
+                  </td>
+                  <td>
+                    <%  if team.registrations.leader.first  %>
+                      <%=team.registrations.leader.first.phone%>
+                    <%else%>
+                      <%= '无'%>
                     <%end%>
                   </td>
                   <td><%= team.registrations.count %></td>

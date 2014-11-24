@@ -30,6 +30,7 @@
                 <th>姓名</th>
                 <th>性别</th>
                 <th>年龄</th>
+                <th>联系方式</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -39,6 +40,7 @@
                   <td><%= person.name %></td>
                   <td><%= person.sex%></td>
                   <td><%= person.age%></td>
+                  <td><%= person.phone%></td>
                   <td>
                     <%= link_to '查看详细信息', person,:class => 'btn btn-small' %>
                     <%= link_to '删除', person, method: :delete, data: { confirm: '确定删除?' },:class => 'btn btn-small btn-danger' %>

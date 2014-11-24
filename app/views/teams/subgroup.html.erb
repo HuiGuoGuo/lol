@@ -4,7 +4,6 @@
 <%else%>
   <% x=1%>
 <%end%>
-<% if @teams %>
 <%= form_tag get_winer_first_teams_path ,:method=> :post do |f|%>
   <%= hidden_field_tag 'state',1%>
   <h2>随机分组如下:</h2>
@@ -59,11 +58,5 @@
       <%=submit_tag '确定',:class => 'btn btn-primary'%>
       <%=link_to '返回',teams_url(audit: '0'),:class => 'btn btn'%>
     </div>
-  </div>
-<%end%>
-<%else%>
-  <div id='main'>
-  <h3> 没有参赛选手</h3>
-  <%=link_to '返回',teams_url(audit: '0'),:class => 'btn btn'%>
   </div>
 <%end%>

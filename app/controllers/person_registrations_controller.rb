@@ -69,7 +69,7 @@ class PersonRegistrationsController < ApplicationController
     @person_registration.destroy
 
     respond_to do |format|
-      format.html { redirect_to person_registrations_url }
+      format.html { redirect_to person_registrations_url(audit: '1') }
       format.json { head :no_content }
     end
   end

@@ -39,6 +39,10 @@ module Blog
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    config.i18n.default_locale = 'zh'
+    config.time_zone = 'Beijing'
+    config.active_record.default_timezone = :local
+
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 

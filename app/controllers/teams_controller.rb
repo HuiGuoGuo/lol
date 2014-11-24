@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     name = params[:team][:team_name]
-    if Team.all.map {|t| t.name}.include?(name)
+    if Team.all.map {|t| t.team_name}.include?(name)
       render :js =>'alert("这个队伍名称已经被别人用了哟，请换个名字")'
     else
       @audit = 0
@@ -77,7 +77,7 @@ class TeamsController < ApplicationController
     @team.destroy
 
     respond_to do |format|
-      format.html { redirect_to teams_url }
+      format.html { redirect_to teams_url(audit: '0') }
       format.json { head :no_content }
     end
   end

@@ -15,8 +15,13 @@
         <div class="box-title">
           <h3>团队信息</h3>
         <div style="float:right; padding-right:2px;">
+          <% if @teams.map {|team| team.state}.include?("冠军")%>
           <%= link_to '查看名次',show_postion_teams_path,:class =>'btn btn-primary btn-large',:target=>'_blank'%>
+          <%end%>
+
+          <% if @teams.count != 0 %>
           <%= link_to '随机分组',subgroup_teams_path,:class =>'btn btn-primary btn-large'%>
+          <%end%>
         </div>
         </div>
         <div class="box-content nopadding">

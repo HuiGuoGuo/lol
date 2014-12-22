@@ -17,18 +17,50 @@
   <body  style="overflow-y:scroll;font:12px 'Microsoft YaHei', 微软雅黑, Arial, Lucida Grande, Tahoma, sans-serif; text-shadow: 0px 0px 0px #D1D1D1;">
     <div id="navigation">
       <div class="container-fluid">
-        <a href="/home/index" id="brand">LOL挑战赛</a>
+        <a href="<%= root_path%>" id="brand">LOL挑战赛</a>
         <div class="user">
           <%= render 'layouts/user' unless params[:controller] == 'home'%>
         </div>
       </div>
     </div>
+
     <div class="container-fluid" id="content">
-      <div >
-        <div class="container-fluid">
-          <%= yield %>
-        </div>
+      <div class="container-fluid">
+        <%= yield %>
       </div>
     </div>
+
+    <% if params[:controller] == 'teams' && params[:action] =='index'%>
+      <div class='span2' style='margin-top:30px;'>
+        <ul class="tiles">
+          <li class="lime">
+          <a  href="#" role="button" class="new_btn" data-toggle="modal" ><span><i class="icon-star"></i></span><span class="name">添加新赛季</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <script>
+        $(".new_btn").click(function(){
+          $("#myModal").modal('show');
+          $("#myModalLabel").html("添加新赛季");
+          $.ajax({data:'',success:function(request){$(".modal-body").html(request);},type:'get',url:'/seasons/new'})
+        })
+      
+      </script>
+      <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Modal header</h3>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+          <button class="btn "  onclick="javascript: $('form:first').submit();" >保存</button>
+        </div>
+      </div>
+
+    <%end%>
+
   </body>
 </html>

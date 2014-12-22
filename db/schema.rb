@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141121083226) do
+ActiveRecord::Schema.define(:version => 20141222074820) do
 
   create_table "person_registrations", :force => true do |t|
     t.string   "name"
@@ -23,11 +23,12 @@ ActiveRecord::Schema.define(:version => 20141121083226) do
     t.string   "number"
     t.string   "phone"
     t.string   "email"
-    t.integer  "season",     :default => 1
     t.integer  "team_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.string   "state"
+    t.integer  "season",     :default => 1
+    t.integer  "reason_id"
   end
 
   create_table "registrations", :force => true do |t|
@@ -41,10 +42,10 @@ ActiveRecord::Schema.define(:version => 20141121083226) do
     t.string   "phone"
     t.string   "email"
     t.boolean  "is_leader",  :default => false
-    t.integer  "season",     :default => 1
     t.integer  "team_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "season",     :default => 1
   end
 
   create_table "roles", :force => true do |t|
@@ -58,12 +59,19 @@ ActiveRecord::Schema.define(:version => 20141121083226) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
-  create_table "teams", :force => true do |t|
-    t.string   "name"
-    t.integer  "season"
-    t.string   "state"
+  create_table "seasons", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "season"
+  end
+
+  create_table "teams", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "state"
+    t.integer  "season",     :default => 1
+    t.integer  "reason_id"
   end
 
   create_table "users", :force => true do |t|
@@ -79,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20141121083226) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

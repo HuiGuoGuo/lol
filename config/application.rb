@@ -37,7 +37,7 @@ module Blog
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password] #不传入password参数到log中
 
     config.i18n.default_locale = 'zh'
     config.time_zone = 'Beijing'

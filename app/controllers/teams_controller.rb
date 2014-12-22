@@ -4,12 +4,22 @@ class TeamsController < ApplicationController
   # GET /teams.json
   before_filter :authenticate_user! ,:except => [:new, :create]
   def index
-    @teams = Team.all
+    @seasons = Season.all
+
+   session[:reason_id] ? @teams = Team.where(reason_id: "#{session[:reason_id]}") : @teams = Team.where(reason_id: 1)  
 
     respond_to do |format|
       format.html { } # index.html.erb
       format.json { render json: @teams }
     end
+  end
+  def render_index
+    session[:reason_id] = params[:reason_id]
+    @teams = Team.where(reason_id: params[:reason_id])
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   # GET /teams/1

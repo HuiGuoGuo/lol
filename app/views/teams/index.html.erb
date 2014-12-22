@@ -1,5 +1,13 @@
 
 <div id = 'main'>
+  </br>
+  </br>
+  </br>
+  <%= select_tag :season_select, options_for_select(@seasons.map {|season| [season.season,season.id]},"赛季#{session[:reason_id]}"),:class => 'select2-me input-large'%>
+  <%= session[:reason_id]%>
+  </br>
+  </br>
+  </br>
   <ul class="nav nav-tabs" id="myTab">
     <li <% if params[:audit] == '0' %>class="active" <% end %>><%= link_to "团队", teams_url(audit: 0) %></li>
     <li<% if params[:audit] == '1' %> class="active" <% end %>><%= link_to "个人", person_registrations_url(audit: 1) %></li>
@@ -9,20 +17,27 @@
       $('#myTab a:last').tab('show');
     })
   </script>
-  <div class="row-fluid">
+
+
+  <div class="row-fluid" id='render_index'>
     <div class="span10">
       <div class="box box-color box-bordered" id="home">
         <div class="box-title">
           <h3>团队信息</h3>
-        <div style="float:right; padding-right:2px;">
-          <% if @teams.map {|team| team.state}.include?("冠军")%>
-          <%= link_to '查看名次',show_postion_teams_path,:class =>'btn btn-primary btn-large',:target=>'_blank'%>
-          <%end%>
+          <div style="float:right; padding-right:2px;">
 
-          <% if @teams.count != 0 %>
-          <%= link_to '随机分组',subgroup_teams_path,:class =>'btn btn-primary btn-large'%>
-          <%end%>
-        </div>
+            <% if @teams.map {|team| team.state}.include?("冠军")%>
+              <%= link_to '查看名次',show_postion_teams_path,:class =>'btn btn-primary btn-large',:target=>'_blank'%>
+            <%end%>
+
+            <% if @teams.count != 0 %>
+              <%= link_to '随机分组',subgroup_teams_path,:class =>'btn btn-primary btn-large'%>
+            <%end%>
+
+
+
+
+          </div>
         </div>
         <div class="box-content nopadding">
           <table class="table dataTable table-hover table-nomargin table-bordered">
@@ -69,4 +84,10 @@
     </div>
   </div>
 </div>
+<script>
+  $("#season_select").change(function(){
+    $.get("/teams/render_index?reason_id="+this.value)
+  })
+
+</script>
 

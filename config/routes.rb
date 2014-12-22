@@ -2,6 +2,17 @@ Blog::Application.routes.draw do
   root :to => 'home#index'
   get "home/index"
   devise_for :users
+
+  devise_scope :user do
+
+    get 'login' , :to => "devise/sessions#new"
+
+    get 'logout' , :to => "devise/sessions#destroy"
+
+  end
+
+  resources :seasons
+
   resources :person_registrations do
     collection do
       get 'subgroup'
@@ -21,6 +32,7 @@ Blog::Application.routes.draw do
       get 'last_winer'
       post 'position'
       get 'show_postion'
+      get 'render_index'
     end
   end
 
@@ -31,6 +43,11 @@ Blog::Application.routes.draw do
       get 'new_member'
       get 'judge_is_leader'
     end
+
+    member do
+      put 'update_user'
+    end
+
   end
 
   # The priority is based upon order of creation:

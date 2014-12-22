@@ -91,4 +91,11 @@ class RegistrationsController < ApplicationController
       format.json {render :json=> result}
     end
   end
+
+  def update_user
+
+    @user = User.find_by_username(params[:user][:username])
+    @user.update_attributes(params[:user])
+
+  end
 end
